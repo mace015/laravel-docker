@@ -1,0 +1,80 @@
+version: '3.7'
+
+services:
+    webserver:
+        image: nginx:alpine
+        container_name: ${PROJECT_NAME}-webserver
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+        links:
+            - application
+        restart: always
+        networks:
+            - application-network
+    application:
+        image: mace015/laravel-docker-application:latest
+        container_name: ${PROJECT_NAME}-app
+        volumes:
+            - ../:/application
+        links: 
+            - database
+        restart: always
+        networks:
+            - application-network
+    database:
+        image: mariadb:latest
+        container_name: ${PROJECT_NAME}-database
+        volumes:
+            - ./data/database:/var/lib/mysql
+        environment:
+            - MYSQL_DATABASE=${DB_DATABASE}
+            - MYSQL_PASSWORD=${DB_ROOT_PASSWORD}
+        restart: always
+        networks:
+            - application-network
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: ${PROJECT_NAME}-phpmyadmin
+        environment:
+            - PMA_HOST=database
+            - PMA_USER=root
+            - PMA_PASSWORD=${MYSQL_PASSWORD}
+        links:
+            - database
+        restart: always
+        networks:
+            - application-network
+    redis:
+        image: redis:alpine
+        container_name: ${PROJECT_NAME}-redis
+        restart: always
+        networks:
+            - application-network
+    workspace:
+        image: mace015/laravel-docker-workspace:latest
+        container_name: ${PROJECT_NAME}-workspace
+        volumes:
+            - ../:/application
+        links: 
+            - database
+        restart: always
+        networks:
+            - application-network
+    worker:
+        image: mace015/laravel-docker-worker:latest
+        container_name: ${PROJECT_NAME}-worker
+        volumes:
+            - ../:/application
+        links: 
+            - database
+        restart: always
+        networks:
+            - application-network
+
+networks:
+    application-network:
+        external:
+            name: ${PROJECT_NAME}-network

@@ -1,0 +1,12 @@
+FROM mace015/laravel-docker-application:latest
+
+# Install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+RUN apt-get install -y nodejs
+
+# Install composer
+RUN curl -sS https://getcomposer.org/installer -o composer-setup.php
+RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+RUN rm composer-setup.php
+
+WORKDIR /application
