@@ -21,6 +21,7 @@ services:
             - ../:/application
         links: 
             - database
+            - redis
         restart: always
         networks:
             - application-network
@@ -31,7 +32,7 @@ services:
             - ./data/database:/var/lib/mysql
         environment:
             - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_PASSWORD=${DB_ROOT_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${DB_DATABASE}
         restart: always
         networks:
             - application-network
@@ -70,6 +71,7 @@ services:
             - ../:/application
         links: 
             - database
+            - redis
         restart: always
         networks:
             - application-network
