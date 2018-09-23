@@ -32,7 +32,8 @@ services:
             - ./data/database:/var/lib/mysql
         environment:
             - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_ROOT_PASSWORD=${DB_DATABASE}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
         restart: always
         networks:
             - application-network
