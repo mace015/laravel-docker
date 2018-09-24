@@ -1,4 +1,4 @@
-FROM mace015/laravel-docker-application:latest
+FROM mace015/laravel-docker-php-cli:latest
 
 WORKDIR /application
 
