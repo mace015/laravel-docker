@@ -43,7 +43,7 @@ services:
         environment:
             - PMA_HOST=database
             - PMA_USER=root
-            - PMA_PASSWORD=${MYSQL_PASSWORD}
+            - PMA_PASSWORD=${DB_PASSWORD}
         links:
             - database
         restart: always
