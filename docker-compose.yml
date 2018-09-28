@@ -76,6 +76,17 @@ services:
         restart: always
         networks:
             - application-network
+    cron:
+        image: mace015/laravel-docker-cron:latest
+        container_name: ${PROJECT_NAME}-cron
+        volumes:
+            - ../:/application
+        links:
+            - database
+            - redis
+        restart: always
+        networks:
+            - application-network
 
 networks:
     application-network:
