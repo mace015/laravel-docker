@@ -22,6 +22,14 @@ A simple yet effective default setup for Laravel on Docker.
 
 `docker-compose stop`
 
+#### Build all images:
+
+`bash scripts/build.sh`
+
+#### List all active containers and their IP's:
+
+`bash scripts/list.sh`
+
 ## FAQ
 
 ##### The worker container keeps crashing?
