@@ -35,7 +35,7 @@ A simple yet effective default setup for Laravel on Docker.
 ##### When trying to start the containers, it complains that the network is missing.
 This setup runs the hosted application under its own docker network to prevent collisions and confusion when running more than one application on a host.
 The network name is defaulted to the project name from the .env file + '-network' (ex: `example-project-network`).
-If the network is missing, create it by running `docker network create network-name-here`.
+If the network is missing, create it by running `docker network create [network name here]`.
 
 ##### The worker container keeps crashing?
 This setup assumes you use Laravel Horizon for your queue setup.
