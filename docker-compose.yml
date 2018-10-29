@@ -9,6 +9,7 @@ services:
             - "443"
         volumes:
             - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
+            - ../:/application
         environment:
             - VIRTUAL_HOST=${HOST_NAME}
         links:
