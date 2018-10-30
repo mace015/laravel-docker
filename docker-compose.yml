@@ -14,7 +14,7 @@ services:
             - VIRTUAL_HOST=${HOST_NAME}
         links:
             - application
-        restart: always
+        restart: unless-stopped
         networks:
             - application-network
     application:
@@ -25,7 +25,7 @@ services:
         links: 
             - database
             - redis
-        restart: always
+        restart: unless-stopped
         networks:
             - application-network
     database:
@@ -37,7 +37,7 @@ services:
             - MYSQL_DATABASE=${DB_DATABASE}
             - MYSQL_PASSWORD=${DB_PASSWORD}
             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-        restart: always
+        restart: unless-stopped
         networks:
             - application-network
     phpmyadmin:
@@ -49,13 +49,13 @@ services:
             - PMA_PASSWORD=${DB_PASSWORD}
         links:
             - database
-        restart: always
+        restart: unless-stopped
         networks:
             - application-network
     redis:
         image: redis:alpine
         container_name: ${PROJECT_NAME}-redis
-        restart: always
+        restart: unless-stopped
         networks:
             - application-network
     workspace:
@@ -65,7 +65,7 @@ services:
             - ../:/application
         links: 
             - database
-        restart: always
+        restart: unless-stopped
         networks:
             - application-network
     worker:
@@ -76,7 +76,7 @@ services:
         links: 
             - database
             - redis
-        restart: always
+        restart: unless-stopped
         networks:
             - application-network
     cron:
@@ -87,7 +87,7 @@ services:
         links:
             - database
             - redis
-        restart: always
+        restart: unless-stopped
         networks:
             - application-network
 
