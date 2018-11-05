@@ -38,9 +38,7 @@ In the event you want HTTPS for your local dev environment, follow these steps:
 - `cd data/cert`.
 - Next, generate the certificates with the following command (remember to replace `[your domain here]` with your actual domain ;) ):
 ```
-openssl req -config [your domain here].conf -new -sha256 -newkey rsa:2048 \
--nodes -keyout [your domain here].key -x509 -days 365 \
--out [your domain here].crt
+openssl req -config [your domain here].conf -new -sha256 -newkey rsa:2048 -nodes -keyout default.key -x509 -days 365 -out default.crt
 ```
 - Import the .crt file into the certificate store of your OS, this is diffrent for every OS (you may need to restart your browser for this change to take effect).
 - Start the containers with the following command: `docker-compose -f docker-compose.yml -f with-ssl.yml up`
