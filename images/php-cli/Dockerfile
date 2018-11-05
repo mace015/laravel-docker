@@ -6,6 +6,9 @@ RUN apt-get update
 # Install dependencies for the PHP extensions
 RUN apt-get install -y zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev libmagickwand-dev gnupg2 libc-client-dev libkrb5-dev
 
+# Configure gd
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+
 # Configure imap
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 
