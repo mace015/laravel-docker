@@ -1,5 +1,8 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
+cp -r $DIR/../config/php $DIR/../images/php-fpm/php
+cp -r $DIR/../config/php $DIR/../images/php-cli/php
+
 docker build -t mace015/laravel-docker-php-fpm $DIR/../images/php-fpm
 docker build -t mace015/laravel-docker-php-cli $DIR/../images/php-cli
 

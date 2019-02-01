@@ -15,6 +15,9 @@ RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
 # Install php extensions
 RUN docker-php-ext-install pdo_mysql zip gd pcntl intl bcmath imap
 
+# Copy custom php.ini into the container
+COPY php/php.ini /usr/local/etc/php/conf.d
+
 # Install and enable imagick
 RUN pecl install imagick
 RUN docker-php-ext-enable imagick
