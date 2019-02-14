@@ -8,10 +8,11 @@ services:
             - "80"
             - "443"
         volumes:
-            - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf
-            - ../:/application
+            - ./config/nginx/default.conf:/etc/nginx/conf.d/default.conf:cached
+            - ../:/application:cached
         environment:
             - VIRTUAL_HOST=${HOST_NAME}
+            - VIRTUAL_PORT=80
         links:
             - application
         restart: unless-stopped
@@ -21,7 +22,7 @@ services:
         image: mace015/laravel-docker-application:latest
         container_name: ${PROJECT_NAME}-app
         volumes:
-            - ../:/application
+            - ../:/application:cached
         links: 
             - database
             - redis
@@ -32,10 +33,9 @@ services:
         image: mariadb:latest
         container_name: ${PROJECT_NAME}-database
         volumes:
-            - ./data/database:/var/lib/mysql
+            - ./data/database:/var/lib/mysql:cached
         environment:
             - MYSQL_DATABASE=${DB_DATABASE}
-            - MYSQL_PASSWORD=${DB_PASSWORD}
             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
         restart: unless-stopped
         networks:
@@ -44,6 +44,8 @@ services:
         image: phpmyadmin/phpmyadmin:latest
         container_name: ${PROJECT_NAME}-phpmyadmin
         environment:
+            - VIRTUAL_HOST=phpmyadmin.${HOST_NAME}
+            - VIRTUAL_PORT=80
             - PMA_HOST=database
             - PMA_USER=root
             - PMA_PASSWORD=${DB_PASSWORD}
@@ -62,7 +64,7 @@ services:
         image: mace015/laravel-docker-workspace:latest
         container_name: ${PROJECT_NAME}-workspace
         volumes:
-            - ../:/application
+            - ../:/application:cached
         links: 
             - database
         restart: unless-stopped
@@ -72,7 +74,7 @@ services:
         image: mace015/laravel-docker-worker:latest
         container_name: ${PROJECT_NAME}-worker
         volumes:
-            - ../:/application
+            - ../:/application:cached
         links: 
             - database
             - redis
@@ -83,7 +85,7 @@ services:
         image: mace015/laravel-docker-cron:latest
         container_name: ${PROJECT_NAME}-cron
         volumes:
-            - ../:/application
+            - ../:/application:cached
         links:
             - database
             - redis
