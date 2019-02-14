@@ -1,3 +1,5 @@
 .env
 data/database/*
 data/cert/*
+images/php-cli/php
+images/php-fpm/php
