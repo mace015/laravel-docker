@@ -43,6 +43,11 @@ openssl req -config [your domain here].conf -new -sha256 -newkey rsa:2048 -nodes
 - Import the .crt file into the certificate store of your OS, this is diffrent for every OS (you may need to restart your browser for this change to take effect).
 - Start the containers with the following command: `docker-compose -f docker-compose.yml -f with-ssl.yml up`
 
+## Note for non-linux users (Mac/Windows)
+Since Docker for Mac and Windows runs in a Linux VM in the background, the containers aren't accessible by IP like they are on Linux.
+You can solve this problem by exposing the required ports, but this approach causes some inherent limitations.
+To circumvent these issues on non-Linux platforms I recommend you use [mace015/nginx-proxy-docker](https://github.com/mace015/nginx-proxy-docker), see that repository for more information.
+
 ## FAQ
 
 ##### When trying to start the containers, it complains that the network is missing.
