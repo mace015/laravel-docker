@@ -1,5 +1,5 @@
 # laravel-docker
-A simple yet effective default setup for Laravel on Docker.
+A simple yet effective default setup for Laravel on Docker, based on Alpine Linux.
 
 ## Installation
 
@@ -49,6 +49,10 @@ You can solve this problem by exposing the required ports, but this approach cau
 To circumvent these issues on non-Linux platforms I recommend you use [mace015/nginx-proxy-docker](https://github.com/mace015/nginx-proxy-docker), see that repository for more information.
 
 ## FAQ
+
+##### I get a permission denied error on the storage folder.
+When starting a new project, the storage folder permissions might be wrong.
+Enter the workspace container (`docker exec -it project-name-workspace ash`) and chmod the storage folder: `chmod -R 777 storage`.
 
 ##### When trying to start the containers, it complains that the network is missing.
 This setup runs the hosted application under its own docker network to prevent collisions and confusion when running more than one application on a host.

@@ -1,8 +1,7 @@
 FROM mace015/laravel-docker-php-cli:latest
 
 # Install nodejs
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
-RUN apt-get install -y nodejs git
+RUN apk add nodejs git mysql-client
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer -o composer-setup.php

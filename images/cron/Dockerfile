@@ -1,7 +1,7 @@
 FROM mace015/laravel-docker-php-cli:latest
 
 # Install cron
-RUN apt-get update && apt-get install -y cron
+RUN apk update
 
 # Copy the cronfile into the container
 COPY crontab /crontab

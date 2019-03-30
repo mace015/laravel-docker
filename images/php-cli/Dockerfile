@@ -1,13 +1,13 @@
-FROM php:7.2-cli
+FROM php:7.3-cli-alpine
 
 # Update system
-RUN apt-get update
+RUN apk update
 
 # Install dependencies for the PHP extensions
-RUN apt-get install -y zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev libmagickwand-dev gnupg2 libc-client-dev libkrb5-dev
+RUN apk add zlib libpng-dev libjpeg-turbo-dev freetype-dev imagemagick-dev gnupg imap-dev krb5-dev openssl-dev libzip-dev icu-dev $PHPIZE_DEPS
 
 # Configure gd
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-png-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 
 # Configure imap
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
