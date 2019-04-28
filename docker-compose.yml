@@ -12,6 +12,8 @@ services:
             - ../:/application:cached
         environment:
             - VIRTUAL_HOST=${HOST_NAME}
+            - LETSENCRYPT_HOST=${HOST_NAME}
+            - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
             - VIRTUAL_PORT=80
         links:
             - application
