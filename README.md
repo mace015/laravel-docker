@@ -7,6 +7,7 @@ A simple yet effective default setup for Laravel on Docker, based on Alpine Linu
 - Optional: Rename the cloned folder to something more generic, like `docker`: `mv laravel-docker docker`.
 - Copy `.env.example` to `.env` and modify it as you see fit with you project's details: `cd laravel-docker && cp .env.example .env`.
 - Build the images: `cd scripts && bash build.sh`.
+- Create the docker network, the network name must be the project name + -network, for example: `docker network create example-project-network`.
 
 ## Usage
 
