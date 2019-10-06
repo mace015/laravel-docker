@@ -25,7 +25,7 @@ services:
         container_name: ${PROJECT_NAME}-app
         volumes:
             - ../:/application:cached
-        links: 
+        links:
             - database
             - redis
         restart: unless-stopped
@@ -46,8 +46,6 @@ services:
         image: phpmyadmin/phpmyadmin:latest
         container_name: ${PROJECT_NAME}-phpmyadmin
         environment:
-            - VIRTUAL_HOST=phpmyadmin.${HOST_NAME}
-            - VIRTUAL_PORT=80
             - PMA_HOST=database
             - PMA_USER=root
             - PMA_PASSWORD=${DB_PASSWORD}
@@ -67,7 +65,7 @@ services:
         container_name: ${PROJECT_NAME}-workspace
         volumes:
             - ../:/application:cached
-        links: 
+        links:
             - database
         restart: unless-stopped
         networks:
@@ -77,7 +75,7 @@ services:
         container_name: ${PROJECT_NAME}-worker
         volumes:
             - ../:/application:cached
-        links: 
+        links:
             - database
             - redis
         restart: unless-stopped
