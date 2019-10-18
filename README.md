@@ -38,7 +38,8 @@ A simple yet effective default setup for Laravel on Docker, based on Alpine Linu
 ## Local HTTPS
 In the event you want HTTPS for your local dev environment, follow these steps:
 
-- First, copy `config/cert/default.conf` to `data/cert/your-domain.conf` (ex: `cp config/cert/default.conf data/cert/example-project.test.conf`).
+- First, create the `data/cert` directory: `mkdir data/cert`.
+- Then, copy `config/cert/default.conf` to `data/cert/your-domain.conf` (ex: `cp config/cert/default.conf data/cert/example-project.test.conf`).
 - Open the file you just copied and replace `[your domain here]` with your domain at the bottom of the file.
 - `cd data/cert`.
 - Next, generate the certificates with the following command (remember to replace `[your domain here]` with your actual domain ;) ):
