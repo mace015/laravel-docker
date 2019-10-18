@@ -8,6 +8,10 @@ A simple yet effective default setup for Laravel on Docker, based on Alpine Linu
 - Copy `.env.example` to `.env` and modify it as you see fit with you project's details: `cd laravel-docker && cp .env.example .env`.
 - Build the images: `cd scripts && bash build.sh`.
 - Create the docker network, the network name must be the project name + -network, for example: `docker network create example-project-network`.
+- Start the containers: `docker-compose up -d`.
+- Enter the container: `docker exec -it [project-name]-workspace ash`.
+- Do all your normal setup for laravel here, things like `composer install`, `npm i && npm run dev`, `php artisan key:generate`.
+- IMPORTANT: make sure the `www-data` user owns the storage directory, from within the container, run: `chown -R www-data storage && chmod -R 775 storage`.
 
 ## Usage
 
