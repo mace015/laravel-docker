@@ -57,7 +57,7 @@ To circumvent these issues on non-Linux platforms I recommend you use [mace015/n
 
 ##### I get a permission denied error on the storage folder.
 When starting a new project, the storage folder permissions might be wrong.
-Enter the workspace container (`docker exec -it project-name-workspace ash`) and chmod the storage folder: `chmod -R 777 storage`.
+Enter the workspace container (`docker exec -it project-name-workspace ash`) and chmod and chown the storage folder: `chown -R www-data storage && chmod -R 775 storage`.
 
 ##### When trying to start the containers, it complains that the network is missing.
 This setup runs the hosted application under its own docker network to prevent collisions and confusion when running more than one application on a host.
