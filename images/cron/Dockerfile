@@ -7,7 +7,7 @@ RUN apk update
 COPY crontab /crontab
 
 # Source the crontab file
-RUN crontab -u root /crontab
+RUN crontab -u www-data /crontab
 
 # Display the cron output
 CMD ["crond", "-f", "-l", "8"]
