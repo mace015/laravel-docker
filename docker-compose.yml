@@ -35,7 +35,7 @@ services:
         image: mariadb:latest
         container_name: ${PROJECT_NAME}-database
         volumes:
-            - ./data/database:/var/lib/mysql:cached
+            - database-data:/var/lib/mysql:cached
         environment:
             - MYSQL_DATABASE=${DB_DATABASE}
             - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
@@ -92,6 +92,10 @@ services:
         restart: unless-stopped
         networks:
             - application-network
+
+volumes:
+    database-data:
+        driver: local
 
 networks:
     application-network:
