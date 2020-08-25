@@ -1,4 +1,4 @@
-FROM php:7.3-cli-alpine
+FROM php:7.4-cli-alpine
 
 # Update system
 RUN apk update
@@ -7,7 +7,7 @@ RUN apk update
 RUN apk add zlib libpng-dev libjpeg-turbo-dev freetype-dev imagemagick-dev gnupg imap-dev krb5-dev openssl-dev libzip-dev icu-dev $PHPIZE_DEPS
 
 # Configure gd
-RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-png-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Configure imap
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl
